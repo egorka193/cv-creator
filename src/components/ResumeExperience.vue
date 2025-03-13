@@ -1,15 +1,23 @@
 <template>
-   <div
+  <div
+    v-for="(experience, i) in experiences"
+    :key="experience.id"
     class="experience"
-      v-for="(experience, i) in experiences"
-      :key="experience.id"
-    >
-      <p class="experience__time">{{ (experiences[i].from !== '' && experiences[i].to !== '') ? `${experiences[i].from + ' - ' + experiences[i].to}` : '-' }}</p>
-      <div class="experience__position">
-        <h4>{{ experiences[i].position !== '' ? experiences[i].position : '' }}</h4>
-        <p>{{ (experiences[i].company !== '' && experiences[i].city !== '') ? `${experiences[i].company + ', ' + experiences[i].city}` : '' }}</p>
-      </div>
+  >
+    <p class="experience__time">
+      {{ (experiences[i].from !== '' && experiences[i].to !== '') ?
+        `${experiences[i].from + ' - ' + experiences[i].to}` : '-' }}
+    </p>
+    <div class="experience__position">
+      <h4>
+        {{ experiences[i].position !== '' ? experiences[i].position : '' }}
+      </h4>
+      <p>
+        {{ (experiences[i].company !== '' && experiences[i].city !== '') ?
+          `${experiences[i].company + ', ' + experiences[i].city}` : '' }}
+      </p>
     </div>
+  </div>
 </template>
 
 <script>
@@ -17,14 +25,16 @@ import ResumeGraph from './ResumeGraph.vue';
 
 export default {
   components: {
-    ResumeGraph
+    // eslint-disable-next-line vue/no-unused-components
+    ResumeGraph,
   },
   props: {
+    // eslint-disable-next-line vue/require-default-prop
     experiences: {
       type: Array,
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

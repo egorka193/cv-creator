@@ -1,6 +1,8 @@
 <template>
   <div class="Questionnaire">
-    <h2 class="Questionnaire__title">Personal Information</h2>
+    <h2 class="Questionnaire__title">
+      Personal Information
+    </h2>
     <div>
       <InputText
         :inputValue="inputsValues.firstName"
@@ -44,8 +46,10 @@
       />
     </div>
     <div class="Questionnaire__title-wrapper">
-      <h2 class="Questionnaire__title">Experience</h2>
-      <ExperienceForm 
+      <h2 class="Questionnaire__title">
+        Experience
+      </h2>
+      <ExperienceForm
         v-for="(experience, i) in experiencesValues"
         :key="experience.id"
         :experiencesValues="experience"
@@ -58,8 +62,10 @@
       />
     </div>
     <div class="Questionnaire__title-wrapper">
-      <h2 class="Questionnaire__title">Education</h2>
-      <EducationForm 
+      <h2 class="Questionnaire__title">
+        Education
+      </h2>
+      <EducationForm
         v-for="(education, i) in educationsValues"
         :key="education.id"
         :educationsValues="education"
@@ -92,6 +98,12 @@ import ExperienceForm from './ExperienceForm.vue';
 import EducationForm from './EducationForm.vue';
 
 export default {
+  components: {
+    InputText,
+    CvButton,
+    ExperienceForm,
+    EducationForm,
+  },
   props: {
     inputsValues: {
       type: Object,
@@ -106,13 +118,7 @@ export default {
       required: true,
     },
   },
-  components: {
-    InputText,
-    CvButton,
-    ExperienceForm,
-    EducationForm,
-  },
-  emits: [ 'handleInput', 'deleteExperience', 'deleteEducation', 'addExperience', 'addEducation', 'changeExperienceForm', 'changeEducationForm', 'clickOnReset', 'linkGenerate' ],
+  emits: ['handleInput', 'deleteExperience', 'deleteEducation', 'addExperience', 'addEducation', 'changeExperienceForm', 'changeEducationForm', 'clickOnReset', 'linkGenerate'],
   setup(props, context) {
     const handleInput = (value, key) => {
       context.emit('handleInput', value, key);
@@ -121,10 +127,10 @@ export default {
       context.emit('linkGenerate', value, key);
     };
     const changeExperienceForm = (index, value, key) => {
-      context.emit('changeExperienceForm',index, value, key);
+      context.emit('changeExperienceForm', index, value, key);
     };
     const changeEducationForm = (index, value, key) => {
-      context.emit('changeEducationForm',index, value, key);
+      context.emit('changeEducationForm', index, value, key);
     };
     const addExperience = () => {
       context.emit('addExperience');
@@ -152,8 +158,8 @@ export default {
       changeEducationForm,
       clickOnReset,
       linkGenerate,
-    }
-  }
+    };
+  },
 };
 </script>
 

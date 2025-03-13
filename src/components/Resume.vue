@@ -1,14 +1,20 @@
 <template>
   <div class="resume">
     <div class="resume__header">
-      <h1 class="resume__title"> {{ (data.firstName !== '' && data.lastName !== '') ? `${data.firstName + ' ' + data.lastName}` : 'Name' }} </h1>
-      <p class="resume__text">{{ data.title !== '' ? data.title : 'Title' }}</p>
+      <h1 class="resume__title">
+        {{ (data.firstName !== '' && data.lastName !== '') ?
+          `${data.firstName + ' ' + data.lastName}`
+          : 'Name' }}
+      </h1>
+      <p class="resume__text">
+        {{ data.title !== '' ? data.title : 'Title' }}
+      </p>
     </div>
     <div class="resume__body">
       <div class="resume__body__craphs">
-        <ResumeGraph
-          name="Description"
-        >{{ data.desription !== '' ? data.desription : '-' }}</ResumeGraph>
+        <ResumeGraph name="Description">
+          {{ data.desription !== '' ? data.desription : '-' }}
+        </ResumeGraph>
         <ResumeGraph name="Experience">
           <ResumeExperience :experiences="experiences" />
         </ResumeGraph>
@@ -17,9 +23,7 @@
         </ResumeGraph>
       </div>
       <div class="resume__body__rootlet">
-        <ResumeRootlet
-          :data="data"
-        />
+        <ResumeRootlet :data="data" />
       </div>
     </div>
   </div>
@@ -31,9 +35,14 @@ import ResumeRootlet from './ResumeRootlet.vue';
 import ResumeExperience from './ResumeExperience.vue';
 import ResumeEducation from './ResumeEducation.vue';
 
-
 export default {
-  props:{
+  components: {
+    ResumeGraph,
+    ResumeRootlet,
+    ResumeEducation,
+    ResumeExperience,
+  },
+  props: {
     data: {
       type: Object,
       required: true,
@@ -47,17 +56,7 @@ export default {
       required: true,
     },
   },
-  components: {
-    ResumeGraph,
-    ResumeRootlet,
-    ResumeEducation,
-    ResumeExperience,
-  },
-  setup(props) {
-    return {
-    };
-  }
-}
+};
 </script>
 
 <style scoped>

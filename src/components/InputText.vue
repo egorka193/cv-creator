@@ -25,17 +25,7 @@ export default {
     },
   },
   emits: ['input'],
-  setup(props, context) {
-
-    const input = () => {
-      context.emit('input', inputValue.value);
-    };
-    
-    return {
-      input,
-    };
-  }
-}
+};
 </script>
 
 <style scoped>

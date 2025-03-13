@@ -1,21 +1,20 @@
-
 <template>
   <Header />
-  <Questionnaire 
-  :inputsValues="data"
-  :experiencesValues="experiences"
-  :educationsValues="educations"
-  @handleInput="changeGraph"
-  @deleteExperience="deleteExperience"
-  @deleteEducation="deleteEducation"
-  @addExperience="addExperience"
-  @addEducation="addEducation"
-  @ChangeExperienceForm="changeExperience"
-  @changeEducationForm="changeEducation"
-  @clickOnReset="ResetAll"
-  @linkGenerate="searchPhoto"
+  <Questionnaire
+    :inputsValues="data"
+    :experiencesValues="experiences"
+    :educationsValues="educations"
+    @handleInput="changeGraph"
+    @deleteExperience="deleteExperience"
+    @deleteEducation="deleteEducation"
+    @addExperience="addExperience"
+    @addEducation="addEducation"
+    @ChangeExperienceForm="changeExperience"
+    @changeEducationForm="changeEducation"
+    @clickOnReset="ResetAll"
+    @linkGenerate="searchPhoto"
   />
-  <Resume 
+  <Resume
     :data="data"
     :experiences="experiences"
     :educations="educations"
@@ -32,13 +31,15 @@ import Footer from './components/Footer.vue';
 
 export default {
   components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
     Header,
     Questionnaire,
     Resume,
+    // eslint-disable-next-line vue/no-reserved-component-names
     Footer,
   },
 
-  setup(props, context) {
+  setup() {
     const data = ref({
       firstName: '',
       lastName: '',
@@ -48,34 +49,33 @@ export default {
       phoneNumber: '',
       email: '',
       desription: '',
-    })
-    const experiences = ref([])
-    let experienceId = 1
-    let educationId = 1
-    const educations = ref([])
+    });
+    const experiences = ref([]);
+    let experienceId = 1;
+    let educationId = 1;
+    const educations = ref([]);
 
     const changeGraph = (value, key) => {
-      data.value[key] = value
+      data.value[key] = value;
     };
     const searchPhoto = (value, key) => {
-      data.value[key] = value
-      console.log(data.value[key]) 
+      data.value[key] = value;
     };
     const changeExperience = (index, value, key) => {
-      experiences.value[index][key] = value
+      experiences.value[index][key] = value;
     };
     const changeEducation = (index, value, key) => {
-      educations.value[index][key] = value
+      educations.value[index][key] = value;
     };
     const deleteExperience = (index) => {
-      experiences.value = experiences.value.filter((item, i) => i !== index)
+      experiences.value = experiences.value.filter((item, i) => i !== index);
     };
     const deleteEducation = (index) => {
-      educations.value = educations.value.filter((item, i) => i !== index)
+      educations.value = educations.value.filter((item, i) => i !== index);
     };
     const ResetAll = () => {
-      experiences.value = []
-      educations.value = []
+      experiences.value = [];
+      educations.value = [];
       data.value = {
         firstName: '',
         lastName: '',
@@ -85,22 +85,23 @@ export default {
         phoneNumber: '',
         email: '',
         desription: '',
-      }
+      };
     };
     const addExperience = () => {
-      let obj = {
+      const obj = {
         id: experienceId,
         position: '',
         company: '',
         city: '',
         from: '',
         to: '',
-      }
-      experienceId++
-      experiences.value.push(obj)
+      };
+      // eslint-disable-next-line no-plusplus
+      experienceId++;
+      experiences.value.push(obj);
     };
     const addEducation = () => {
-      let obj = {
+      const obj = {
         id: educationId,
         universityName: '',
         city: '',
@@ -108,9 +109,10 @@ export default {
         subject: '',
         from: '',
         to: '',
-      }
-      educationId++
-      educations.value.push(obj)
+      };
+      // eslint-disable-next-line no-plusplus
+      educationId++;
+      educations.value.push(obj);
     };
 
     return {
@@ -128,7 +130,7 @@ export default {
       searchPhoto,
     };
   },
-}
+};
 </script>
 
 <style scoped>

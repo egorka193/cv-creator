@@ -21,8 +21,8 @@ export default {
       default: '',
     },
   },
-  emits: [ 'handleClick' ],
-  setup (props, context) {
+  emits: ['handleClick'],
+  setup(props, context) {
     const handleClick = () => {
       context.emit('handleClick');
     };
@@ -30,8 +30,8 @@ export default {
     return {
       handleClick,
     };
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
