@@ -1,22 +1,30 @@
 <template>
   <div class="resume_rootlet__wrapper">
-    <img 
+    <img
       class="resume_rootlet__img"
       :src="data.photo"
     >
-    <h3 class="resume_rootlet__title">Personal Details</h3>
+    <h3 class="resume_rootlet__title">
+      Personal Details
+    </h3>
     <hr>
     <h4>
       Address:
-      <p>{{ data.address !== '' ? data.address : '' }}</p>
+      <p>
+        {{ data.address !== '' ? data.address : '' }}
+      </p>
     </h4>
     <h4>
       Phone number:
-      <p>{{ data.phoneNumber !== '' ? data.phoneNumber : '' }}</p>
+      <p>
+        {{ data.phoneNumber !== '' ? data.phoneNumber : '' }}
+      </p>
     </h4>
     <h4>
       Email:
-      <p>{{ data.email !== '' ? data.email : '' }}</p>
+      <p>
+        {{ data.email !== '' ? data.email : '' }}
+      </p>
     </h4>
   </div>
 </template>
@@ -25,12 +33,12 @@
 
 export default {
   props: {
-    data:{
+    data: {
       type: Object,
       required: true,
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -1,8 +1,10 @@
 <template>
   <div class="resume_graph__wrapper">
-    <h3 class="resume_graph__title">{{ name }}</h3>
+    <h3 class="resume_graph__title">
+      {{ name }}
+    </h3>
     <hr>
-    <slot>ihbugvycuycctchcucf</slot>
+    <slot>dvd</slot>
   </div>
 </template>
 
@@ -10,12 +12,12 @@
 
 export default {
   props: {
-    name:{
+    name: {
       type: String,
       required: true,
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

@@ -1,8 +1,9 @@
 <template>
   <div class="header">
-    <h1 class="header__title">CV CREATOR</h1>
+    <h1 class="header__title">
+      CV CREATOR
+    </h1>
   </div>
- 
 </template>
 
 <script setup>

@@ -35,17 +35,17 @@ import CvButton from './CvButton.vue';
 import InputText from './InputText.vue';
 
 export default {
-  props: {
-    experiencesValues: {
-      type: Object,
-      required: true,
-    }
-  },
   components: {
     CvButton,
     InputText,
   },
-  emits: [ 'deleteExperience', 'handleInput' ],
+  props: {
+    experiencesValues: {
+      type: Object,
+      required: true,
+    },
+  },
+  emits: ['deleteExperience', 'handleInput'],
   setup(props, context) {
     const deleteExperience = () => {
       context.emit('deleteExperience');
@@ -58,8 +58,8 @@ export default {
       deleteExperience,
       handleInput,
     };
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

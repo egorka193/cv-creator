@@ -1,8 +1,10 @@
 <template>
   <div class="footer">
-    <h1 class="footer__title">Copyright © 2025 Egor Kondratev</h1>
+    <h1 class="footer__title">
+      Copyright © 2025 Egor Kondratev
+    </h1>
     <img
-    class="footer__img"
+      class="footer__img"
       src="/src/img/github.png"
     >
   </div>
