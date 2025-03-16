@@ -1,24 +1,28 @@
 <template>
   <div class="resume">
     <div class="resume__header">
-      <h1 class="resume__title">
-        {{ (data.firstName !== '' && data.lastName !== '') ?
-          `${data.firstName + ' ' + data.lastName}`
-          : 'Name' }}
+      <h1 class="resume__header-title">
+        {{ fullName }}
       </h1>
-      <p class="resume__text">
+      <p class="resume__header-text">
         {{ data.title !== '' ? data.title : 'Title' }}
       </p>
     </div>
     <div class="resume__body">
-      <div class="resume__body__craphs">
+      <div class="resume__body__graphs">
         <ResumeGraph name="Description">
-          {{ data.desription !== '' ? data.desription : '-' }}
+          {{ data.description !== '' ? data.description : '-' }}
         </ResumeGraph>
         <ResumeGraph name="Experience">
+          <div v-if="experiences.length === 0">
+            -
+          </div>
           <ResumeExperience :experiences="experiences" />
         </ResumeGraph>
         <ResumeGraph name="Educations">
+          <div v-if="educations.length === 0">
+            -
+          </div>
           <ResumeEducation :educations="educations" />
         </ResumeGraph>
       </div>
@@ -30,6 +34,7 @@
 </template>
 
 <script>
+import { computed } from 'vue';
 import ResumeGraph from './ResumeGraph.vue';
 import ResumeRootlet from './ResumeRootlet.vue';
 import ResumeExperience from './ResumeExperience.vue';
@@ -56,6 +61,16 @@ export default {
       required: true,
     },
   },
+  setup(props) {
+    const fullName = computed(() => {
+      const isNotEmpty = props.data.firstName !== '' && props.data.lastName !== '';
+      return isNotEmpty ? `${props.data.firstName} ${props.data.lastName}` : 'Name';
+    });
+
+    return {
+      fullName,
+    };
+  },
 };
 </script>
 
@@ -78,18 +93,19 @@ export default {
   -moz-box-shadow: 0px 8px 27px -15px rgba(0,0,0,0.75);
   height: 1400px;
 }
-.resume__title{
+.resume__header-title{
   font-weight: 700;
   font-size: 48px;
 }
-.resume__text{
+.resume__header-text{
   font-weight: 500;
   font-size: 32px;
 }
 .resume__body__rootlet{
   background-color: rgba(209, 213, 220, 1);
+  width: 270px;
 }
-.resume__body__craphs{
+.resume__body__graphs{
   padding: 28px 40px;
 }
 </style>

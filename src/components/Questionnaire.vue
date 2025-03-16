@@ -1,52 +1,52 @@
 <template>
-  <div class="Questionnaire">
-    <h2 class="Questionnaire__title">
+  <div class="questionnaire">
+    <h2 class="questionnaire__title">
       Personal Information
     </h2>
     <div>
       <InputText
         :inputValue="inputsValues.firstName"
-        inputsPlaceholder="First name"
+        placeholder="First name"
         @input="handleInput($event, 'firstName')"
       />
       <InputText
         :inputValue="inputsValues.lastName"
-        inputsPlaceholder="Last name"
+        placeholder="Last name"
         @input="handleInput($event, 'lastName')"
       />
       <InputText
         :inputValue="inputsValues.title"
-        inputsPlaceholder="Title"
+        placeholder="Title"
         @input="handleInput($event, 'title')"
       />
       <InputText
         :inputValue="inputsValues.photo"
-        inputsPlaceholder="Your photo"
+        placeholder="Your photo"
         @input="linkGenerate($event, 'photo')"
       />
       <InputText
         :inputValue="inputsValues.address"
-        inputsPlaceholder="Address"
+        placeholder="Address"
         @input="handleInput($event, 'address')"
       />
       <InputText
         :inputValue="inputsValues.phoneNumber"
-        inputsPlaceholder="Phone number"
+        placeholder="Phone number"
         @input="handleInput($event, 'phoneNumber')"
       />
       <InputText
         :inputValue="inputsValues.email"
-        inputsPlaceholder="Email"
+        placeholder="Email"
         @input="handleInput($event, 'email')"
       />
       <InputText
-        :inputValue="inputsValues.desription"
-        inputsPlaceholder="Description"
-        @input="handleInput($event, 'desription')"
+        :inputValue="inputsValues.description"
+        placeholder="Description"
+        @input="handleInput($event, 'description')"
       />
     </div>
-    <div class="Questionnaire__title-wrapper">
-      <h2 class="Questionnaire__title">
+    <div class="questionnaire__title-wrapper">
+      <h2 class="questionnaire__title">
         Experience
       </h2>
       <ExperienceForm
@@ -54,15 +54,15 @@
         :key="experience.id"
         :experiencesValues="experience"
         @deleteExperience="deleteExperience(i)"
-        @handleInput="(value, key) => changeExperienceForm(i, value, key)"
+        @handleInput="(key, value) => changeExperienceForm(i, key, value)"
       />
       <CvButton
         name="Add"
         @handleClick="addExperience"
       />
     </div>
-    <div class="Questionnaire__title-wrapper">
-      <h2 class="Questionnaire__title">
+    <div class="questionnaire__title-wrapper">
+      <h2 class="questionnaire__title">
         Education
       </h2>
       <EducationForm
@@ -70,14 +70,14 @@
         :key="education.id"
         :educationsValues="education"
         @deleteEducation="deleteEducation(i)"
-        @handleInput="(value, key) => changeEducationForm(i, value, key)"
+        @handleInput="(key, value) => changeEducationForm(i, key, value)"
       />
       <CvButton
         name="Add"
         @handleClick="addEducation"
       />
     </div>
-    <div class="Questionnaire__buttons">
+    <div class="questionnaire__buttons">
       <CvButton
         name="Reset"
         color="red"
@@ -118,7 +118,10 @@ export default {
       required: true,
     },
   },
-  emits: ['handleInput', 'deleteExperience', 'deleteEducation', 'addExperience', 'addEducation', 'changeExperienceForm', 'changeEducationForm', 'clickOnReset', 'linkGenerate'],
+  emits: [
+    'handleInput', 'deleteExperience', 'deleteEducation', 'addExperience', 'addEducation',
+    'changeExperienceForm', 'changeEducationForm', 'clickOnReset', 'linkGenerate',
+  ],
   setup(props, context) {
     const handleInput = (value, key) => {
       context.emit('handleInput', value, key);
@@ -126,11 +129,11 @@ export default {
     const linkGenerate = (value, key) => {
       context.emit('linkGenerate', value, key);
     };
-    const changeExperienceForm = (index, value, key) => {
-      context.emit('changeExperienceForm', index, value, key);
+    const changeExperienceForm = (index, key, value) => {
+      context.emit('changeExperienceForm', index, key, value);
     };
-    const changeEducationForm = (index, value, key) => {
-      context.emit('changeEducationForm', index, value, key);
+    const changeEducationForm = (index, key, value) => {
+      context.emit('changeEducationForm', index, key, value);
     };
     const addExperience = () => {
       context.emit('addExperience');
@@ -164,9 +167,9 @@ export default {
 </script>
 
 <style scoped>
-.Questionnaire{
+.questionnaire{
   background-color: #f3f4f6;
-  margin: 30px auto;
+  margin: auto;
   max-width: 1150px;
   border-radius: 10px;
   box-shadow: 0px 8px 28px -15px rgba(0,0,0,0.75);
@@ -174,17 +177,17 @@ export default {
   -moz-box-shadow: 0px 8px 28px -15px rgba(0,0,0,0.75);
   padding: 30px;
 }
-.Questionnaire__title{
+.questionnaire__title{
   color: black;
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 20px;
 }
-.Questionnaire__title-wrapper{
-  margin-top: 20px;
-  margin-bottom: 60px;
+.questionnaire__title-wrapper{
+  margin-top: 60px;
 }
-.Questionnaire__buttons{
+.questionnaire__buttons{
+  margin-top: 60px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;

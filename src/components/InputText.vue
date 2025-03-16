@@ -1,12 +1,11 @@
 <template>
-  <div class="input__wrapper">
+  <div class="inputText">
     <input
       class="input"
       type="text"
-      :placeholder="inputsPlaceholder"
+      :placeholder="placeholder"
       :value="inputValue"
       @input="$emit('input', $event.target.value)"
-      @keydown.enter="input"
     >
   </div>
 </template>
@@ -19,7 +18,7 @@ export default {
       type: String,
       required: true,
     },
-    inputsPlaceholder: {
+    placeholder: {
       type: String,
       required: true,
     },
@@ -31,10 +30,12 @@ export default {
 <style scoped>
 .input{
   padding: 12px;
-  margin-bottom: 20px;
   border-radius: 5px;
   border: none;
   width: 100%;
   font-size: 19px;
+}
+.inputText{
+  margin-bottom: 20px;
 }
 </style>

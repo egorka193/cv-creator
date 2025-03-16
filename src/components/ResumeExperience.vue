@@ -21,17 +21,12 @@
 </template>
 
 <script>
-import ResumeGraph from './ResumeGraph.vue';
 
 export default {
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    ResumeGraph,
-  },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     experiences: {
       type: Array,
+      required: true,
     },
   },
 };
@@ -42,6 +37,7 @@ export default {
   display: flex;
   gap: 20px;
   font-size: 20px;
+  margin-bottom: 20px;
 }
 .experience__time{
   font-weight: 600;

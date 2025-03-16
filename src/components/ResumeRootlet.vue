@@ -1,30 +1,30 @@
 <template>
-  <div class="resume_rootlet__wrapper">
+  <div class="resume-rootlet__wrapper">
     <img
-      class="resume_rootlet__img"
+      class="resume-rootlet__img"
       :src="data.photo"
     >
-    <h3 class="resume_rootlet__title">
+    <h3 class="resume-rootlet__title">
       Personal Details
     </h3>
     <hr>
     <h4>
       Address:
-      <p>
+      <div>
         {{ data.address !== '' ? data.address : '' }}
-      </p>
+      </div>
     </h4>
     <h4>
       Phone number:
-      <p>
+      <div>
         {{ data.phoneNumber !== '' ? data.phoneNumber : '' }}
-      </p>
+      </div>
     </h4>
     <h4>
       Email:
-      <p>
+      <div>
         {{ data.email !== '' ? data.email : '' }}
-      </p>
+      </div>
     </h4>
   </div>
 </template>
@@ -42,18 +42,18 @@ export default {
 </script>
 
 <style scoped>
-.resume_rootlet__img{
+.resume-rootlet__img{
   width: 100%;
   height: 100%;
   margin-bottom: 16px;
   border-radius: 10px;
 }
-.resume_rootlet__title{
+.resume-rootlet__title{
   font-weight: 600;
   font-size: 28px;
   color: #1e3a8a;
 }
-.resume_rootlet__wrapper{
+.resume-rootlet__wrapper{
   padding: 14px 20px;
 }
 hr{

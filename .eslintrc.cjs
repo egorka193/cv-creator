@@ -24,5 +24,6 @@ module.exports = {
     }],
     'vue/attribute-hyphenation': 'off',
     'vue/v-on-event-hyphenation': 'off',
+    'max-len': ['error', { code: 100 }],
   },
 };

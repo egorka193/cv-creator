@@ -1,10 +1,10 @@
 <template>
-  <div class="resume_graph__wrapper">
-    <h3 class="resume_graph__title">
+  <div class="resume-graph__wrapper">
+    <h3 class="resume-graph__title">
       {{ name }}
     </h3>
     <hr>
-    <slot>dvd</slot>
+    <slot />
   </div>
 </template>
 
@@ -21,13 +21,10 @@ export default {
 </script>
 
 <style scoped>
-.resume_graph__wrapper{
+.resume-graph__wrapper{
   margin-bottom: 30px;
 }
-.resume_graph__text{
-  margin-top: 20px;
-}
-.resume_graph__title{
+.resume-graph__title{
   font-size: 24px;
   font-weight: 600;
   color: #1e3a8a;

@@ -45,7 +45,6 @@ export default {
   font-size: 25px;
   cursor: pointer;
   transition: all 0.5s;
-  margin-bottom: 20px;
 }
 .cv-button:hover{
   opacity: .8;

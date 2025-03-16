@@ -3,10 +3,12 @@
     <h1 class="footer__title">
       Copyright © 2025 Egor Kondratev
     </h1>
-    <img
-      class="footer__img"
-      src="/src/img/github.png"
-    >
+    <a href="https://github.com/egorka193/cv-creator">
+      <img
+        class="footer__img"
+        src="/src/img/github.png"
+      >
+    </a>
   </div>
 </template>
 

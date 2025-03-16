@@ -1,33 +1,35 @@
 <template>
-  <InputText
-    :inputValue="experiencesValues.position"
-    inputsPlaceholder="Position"
-    @input="handleInput($event, 'position')"
-  />
-  <InputText
-    :inputValue="experiencesValues.company"
-    inputsPlaceholder="Company"
-    @input="handleInput($event, 'company')"
-  />
-  <InputText
-    :inputValue="experiencesValues.city"
-    inputsPlaceholder="City"
-    @input="handleInput($event, 'city')"
-  />
-  <InputText
-    :inputValue="experiencesValues.from"
-    inputsPlaceholder="From"
-    @input="handleInput($event, 'from')"
-  />
-  <InputText
-    :inputValue="experiencesValues.to"
-    inputsPlaceholder="To"
-    @input="handleInput($event, 'to')"
-  />
-  <CvButton
-    name="Delete"
-    @handleClick="deleteExperience"
-  />
+  <div class="experience_form">
+    <InputText
+      :inputValue="experiencesValues.position"
+      placeholder="Position"
+      @input="handleInput('position', $event)"
+    />
+    <InputText
+      :inputValue="experiencesValues.company"
+      placeholder="Company"
+      @input="handleInput('company', $event)"
+    />
+    <InputText
+      :inputValue="experiencesValues.city"
+      placeholder="City"
+      @input="handleInput('city', $event)"
+    />
+    <InputText
+      :inputValue="experiencesValues.from"
+      placeholder="From"
+      @input="handleInput('from', $event)"
+    />
+    <InputText
+      :inputValue="experiencesValues.to"
+      placeholder="To"
+      @input="handleInput('to', $event)"
+    />
+    <CvButton
+      name="Delete"
+      @handleClick="deleteExperience"
+    />
+  </div>
 </template>
 
 <script>
@@ -50,8 +52,8 @@ export default {
     const deleteExperience = () => {
       context.emit('deleteExperience');
     };
-    const handleInput = (value, key) => {
-      context.emit('handleInput', value, key);
+    const handleInput = (key, value) => {
+      context.emit('handleInput', key, value);
     };
 
     return {
@@ -63,5 +65,7 @@ export default {
 </script>
 
 <style scoped>
-
+.experience_form{
+  margin-bottom: 20px;
+}
 </style>

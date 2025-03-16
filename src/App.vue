@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <CvHeader />
   <Questionnaire
     :inputsValues="data"
     :experiencesValues="experiences"
@@ -11,7 +11,7 @@
     @addEducation="addEducation"
     @ChangeExperienceForm="changeExperience"
     @changeEducationForm="changeEducation"
-    @clickOnReset="ResetAll"
+    @clickOnReset="resetAll"
     @linkGenerate="searchPhoto"
   />
   <Resume
@@ -19,28 +19,26 @@
     :experiences="experiences"
     :educations="educations"
   />
-  <Footer />
+  <CvFooter />
 </template>
 
 <script>
 import { ref } from 'vue';
-import Header from './components/Header.vue';
+import CvHeader from './components/CvHeader.vue';
 import Questionnaire from './components/Questionnaire.vue';
 import Resume from './components/Resume.vue';
-import Footer from './components/Footer.vue';
+import CvFooter from './components/CvFooter.vue';
 
 export default {
   components: {
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Header,
+    CvHeader,
     Questionnaire,
     Resume,
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Footer,
+    CvFooter,
   },
 
   setup() {
-    const data = ref({
+    const initialData = {
       firstName: '',
       lastName: '',
       title: '',
@@ -48,8 +46,9 @@ export default {
       address: '',
       phoneNumber: '',
       email: '',
-      desription: '',
-    });
+      description: '',
+    };
+    const data = ref({ ...initialData });
     const experiences = ref([]);
     let experienceId = 1;
     let educationId = 1;
@@ -58,13 +57,13 @@ export default {
     const changeGraph = (value, key) => {
       data.value[key] = value;
     };
-    const searchPhoto = (value, key) => {
-      data.value[key] = value;
+    const searchPhoto = () => {
+      // do it later
     };
-    const changeExperience = (index, value, key) => {
+    const changeExperience = (index, key, value) => {
       experiences.value[index][key] = value;
     };
-    const changeEducation = (index, value, key) => {
+    const changeEducation = (index, key, value) => {
       educations.value[index][key] = value;
     };
     const deleteExperience = (index) => {
@@ -73,19 +72,10 @@ export default {
     const deleteEducation = (index) => {
       educations.value = educations.value.filter((item, i) => i !== index);
     };
-    const ResetAll = () => {
+    const resetAll = () => {
       experiences.value = [];
       educations.value = [];
-      data.value = {
-        firstName: '',
-        lastName: '',
-        title: '',
-        photo: '',
-        address: '',
-        phoneNumber: '',
-        email: '',
-        desription: '',
-      };
+      data.value = { ...initialData };
     };
     const addExperience = () => {
       const obj = {
@@ -96,8 +86,7 @@ export default {
         from: '',
         to: '',
       };
-      // eslint-disable-next-line no-plusplus
-      experienceId++;
+      experienceId += 1;
       experiences.value.push(obj);
     };
     const addEducation = () => {
@@ -110,8 +99,7 @@ export default {
         from: '',
         to: '',
       };
-      // eslint-disable-next-line no-plusplus
-      educationId++;
+      educationId += 1;
       educations.value.push(obj);
     };
 
@@ -126,7 +114,7 @@ export default {
       addEducation,
       changeExperience,
       changeEducation,
-      ResetAll,
+      resetAll,
       searchPhoto,
     };
   },

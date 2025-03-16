@@ -4,33 +4,34 @@
     :key="education.id"
     class="education"
   >
-    <p class="education__time">
+    <div class="education__time">
       {{ (educations[i].from !== '' && educations[i].to !== '') ?
         `${educations[i].from + ' - ' + educations[i].to}` : '-' }}
-    </p>
+    </div>
     <div class="education__degree">
       <h4 class="education__university">
         {{ (educations[i].universityName !== '' && educations[i].city !== '') ?
           `${educations[i].universityName + ', ' + educations[i].city}` : '' }}
       </h4>
-      <p>{{ educations[i].degree !== '' ? `${'Degree' + ': ' + educations[i].degree}` : '' }}</p>
-      <p>{{ educations[i].subject !== '' ? `${'Subject' + ': ' + educations[i].subject}` : '' }}</p>
+      <div>
+        {{ educations[i].degree !== '' ?
+          `${'Degree' + ': ' + educations[i].degree}` : '' }}
+      </div>
+      <div>
+        {{ educations[i].subject !== '' ?
+          `${'Subject' + ': ' + educations[i].subject}` : '' }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import ResumeGraph from './ResumeGraph.vue';
 
 export default {
-  components: {
-    // eslint-disable-next-line vue/no-unused-components
-    ResumeGraph,
-  },
   props: {
-    // eslint-disable-next-line vue/require-default-prop
     educations: {
       type: Array,
+      required: true,
     },
   },
 };
@@ -41,6 +42,7 @@ export default {
   display: flex;
   gap: 20px;
   font-size: 20px;
+  margin-bottom: 20px;
 }
 .education__time{
   font-weight: 600;
