@@ -1,5 +1,8 @@
 <template>
-  <div class="resume">
+  <div
+    class="resume"
+    id="printable"
+  >
     <div class="resume__header">
       <h1 class="resume__header-title">
         {{ fullName }}
