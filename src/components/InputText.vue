@@ -1,5 +1,5 @@
 <template>
-  <div class="inputText">
+  <div class="input-text">
     <input
       class="input"
       type="text"
@@ -35,7 +35,7 @@ export default {
   width: 100%;
   font-size: 19px;
 }
-.inputText{
+.input-text{
   margin-bottom: 20px;
 }
 </style>

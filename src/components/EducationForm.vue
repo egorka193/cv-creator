@@ -1,5 +1,5 @@
 <template>
-  <div class="education_form">
+  <div class="education-form">
     <InputText
       :inputValue="educationsValues.universityName"
       placeholder="University Name"
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style scoped>
-.education_form{
+.education-form{
   margin-bottom: 20px;
 }
 </style>

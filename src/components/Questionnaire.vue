@@ -3,7 +3,7 @@
     <h2 class="questionnaire__title">
       Personal Information
     </h2>
-    <div>
+    <div class="questionnaire__inputs-wrapper">
       <InputText
         :inputValue="inputsValues.firstName"
         placeholder="First name"
@@ -40,6 +40,7 @@
         @input="handleInput($event, 'email')"
       />
       <InputText
+        class="last-child"
         :inputValue="inputsValues.description"
         placeholder="Description"
         @input="handleInput($event, 'description')"
@@ -119,8 +120,15 @@ export default {
     },
   },
   emits: [
-    'handleInput', 'deleteExperience', 'deleteEducation', 'addExperience', 'addEducation',
-    'changeExperienceForm', 'changeEducationForm', 'clickOnReset', 'linkGenerate',
+    'handleInput',
+    'deleteExperience',
+    'deleteEducation',
+    'addExperience',
+    'addEducation',
+    'changeExperienceForm',
+    'changeEducationForm',
+    'clickOnReset',
+    'linkGenerate',
   ],
   setup(props, context) {
     const handleInput = (value, key) => {
@@ -169,7 +177,7 @@ export default {
 <style scoped>
 .questionnaire{
   background-color: #f3f4f6;
-  margin: auto;
+  margin: 0px auto 50px auto;
   max-width: 1150px;
   border-radius: 10px;
   box-shadow: 0px 8px 28px -15px rgba(0,0,0,0.75);
@@ -184,12 +192,17 @@ export default {
   margin-bottom: 20px;
 }
 .questionnaire__title-wrapper{
-  margin-top: 60px;
+  margin-bottom: 60px;
 }
 .questionnaire__buttons{
-  margin-top: 60px;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+.questionnaire__inputs-wrapper{
+  margin-bottom: 60px;
+}
+.last-child{
+  margin-bottom: 0px;
 }
 </style>

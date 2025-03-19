@@ -3,7 +3,10 @@
     <h1 class="footer__title">
       Copyright © 2025 Egor Kondratev
     </h1>
-    <a href="https://github.com/egorka193/cv-creator">
+    <a
+      href="https://github.com/egorka193/cv-creator"
+      target="_blank"
+    >
       <img
         class="footer__img"
         src="/src/img/github.png"
@@ -24,7 +27,7 @@
   gap: 20px;
   background-color: #1f2937;
   padding: 24px;
-  margin: 60px 35px 0px 35px;
+  margin: 0px 35px 0px 35px;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
   text-align: center;

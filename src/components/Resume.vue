@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .resume{
-  margin: 30px auto;
+  margin: 0px auto 60px auto;
   max-width: 1150px;
 }
 .resume__header{

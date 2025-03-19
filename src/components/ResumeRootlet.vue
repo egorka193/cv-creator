@@ -10,21 +10,21 @@
     <hr>
     <h4>
       Address:
-      <div>
+      <span>
         {{ data.address !== '' ? data.address : '' }}
-      </div>
+      </span>
     </h4>
     <h4>
       Phone number:
-      <div>
+      <span>
         {{ data.phoneNumber !== '' ? data.phoneNumber : '' }}
-      </div>
+      </span>
     </h4>
     <h4>
       Email:
-      <div>
+      <span>
         {{ data.email !== '' ? data.email : '' }}
-      </div>
+      </span>
     </h4>
   </div>
 </template>

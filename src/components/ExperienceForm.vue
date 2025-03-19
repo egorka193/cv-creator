@@ -1,5 +1,5 @@
 <template>
-  <div class="experience_form">
+  <div class="experience-form">
     <InputText
       :inputValue="experiencesValues.position"
       placeholder="Position"
@@ -65,7 +65,4 @@ export default {
 </script>
 
 <style scoped>
-.experience_form{
-  margin-bottom: 20px;
-}
 </style>
