@@ -1,7 +1,7 @@
 <template>
   <div
-    class="resume"
     id="printable"
+    class="resume"
   >
     <div class="resume__header">
       <h1 class="resume__header-title">
