@@ -1,47 +1,126 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <CvHeader />
+  <Questionnaire
+    :inputsValues="data"
+    :experiencesValues="experiences"
+    :educationsValues="educations"
+    @handleInput="changeGraph"
+    @deleteExperience="deleteExperience"
+    @deleteEducation="deleteEducation"
+    @addExperience="addExperience"
+    @addEducation="addEducation"
+    @ChangeExperienceForm="changeExperience"
+    @changeEducationForm="changeEducation"
+    @clickOnReset="resetAll"
+    @linkGenerate="searchPhoto"
+  />
+  <Resume
+    :data="data"
+    :experiences="experiences"
+    :educations="educations"
+  />
+  <CvFooter />
 </template>
 
+<script>
+import { ref } from 'vue';
+import CvHeader from './components/CvHeader.vue';
+import Questionnaire from './components/Questionnaire.vue';
+import Resume from './components/Resume.vue';
+import CvFooter from './components/CvFooter.vue';
+
+export default {
+  components: {
+    CvHeader,
+    Questionnaire,
+    Resume,
+    CvFooter,
+  },
+
+  setup() {
+    const initialData = {
+      firstName: '',
+      lastName: '',
+      title: '',
+      photo: '',
+      address: '',
+      phoneNumber: '',
+      email: '',
+      description: '',
+    };
+    const data = ref({ ...initialData });
+    const experiences = ref([]);
+    let experienceId = 1;
+    let educationId = 1;
+    const educations = ref([]);
+
+    const changeGraph = (value, key) => {
+      data.value[key] = value;
+    };
+    const searchPhoto = () => {
+      // do it later
+    };
+    const changeExperience = (index, key, value) => {
+      experiences.value[index][key] = value;
+    };
+    const changeEducation = (index, key, value) => {
+      educations.value[index][key] = value;
+    };
+    const deleteExperience = (index) => {
+      experiences.value = experiences.value.filter((item, i) => i !== index);
+    };
+    const deleteEducation = (index) => {
+      educations.value = educations.value.filter((item, i) => i !== index);
+    };
+    const resetAll = () => {
+      experiences.value = [];
+      educations.value = [];
+      data.value = { ...initialData };
+    };
+    const addExperience = () => {
+      const obj = {
+        id: experienceId,
+        position: '',
+        company: '',
+        city: '',
+        from: '',
+        to: '',
+      };
+      experienceId += 1;
+      experiences.value.push(obj);
+    };
+    const addEducation = () => {
+      const obj = {
+        id: educationId,
+        universityName: '',
+        city: '',
+        degree: '',
+        subject: '',
+        from: '',
+        to: '',
+      };
+      educationId += 1;
+      educations.value.push(obj);
+    };
+
+    return {
+      data,
+      experiences,
+      educations,
+      changeGraph,
+      deleteExperience,
+      deleteEducation,
+      addExperience,
+      addEducation,
+      changeExperience,
+      changeEducation,
+      resetAll,
+      searchPhoto,
+    };
+  },
+};
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
