@@ -87,6 +87,7 @@
       <CvButton
         name="Generate PDF"
         color="green"
+        @handleClick="generatePdf"
       />
     </div>
   </div>
@@ -158,6 +159,9 @@ export default {
     const clickOnReset = () => {
       context.emit('clickOnReset');
     };
+    const generatePdf = () => {
+      window.print();
+    };
 
     return {
       handleInput,
@@ -169,6 +173,7 @@ export default {
       changeEducationForm,
       clickOnReset,
       linkGenerate,
+      generatePdf,
     };
   },
 };

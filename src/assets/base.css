@@ -9,3 +9,13 @@
 body {
   background: #d1d5dc;
 }
+
+
+@media print {
+  #app > * {
+    display: none; 
+  }
+  #printable {
+    display: block;
+  }
+}
