@@ -1,33 +1,22 @@
 <template>
   <div
-    v-for="(education, i) in educations"
+    v-for="(education) in educations"
     :key="education.id"
     class="education"
   >
-    <div class="education__time">
-      {{ (educations[i].from !== '' && educations[i].to !== '') ?
-        `${educations[i].from + ' - ' + educations[i].to}` : '-' }}
-    </div>
-    <div class="education__degree">
-      <h4 class="education__university">
-        {{ (educations[i].universityName !== '' && educations[i].city !== '') ?
-          `${educations[i].universityName + ', ' + educations[i].city}` : '' }}
-      </h4>
-      <div>
-        {{ educations[i].degree !== '' ?
-          `${'Degree' + ': ' + educations[i].degree}` : '' }}
-      </div>
-      <div>
-        {{ educations[i].subject !== '' ?
-          `${'Subject' + ': ' + educations[i].subject}` : '' }}
-      </div>
-    </div>
+    <Education
+      :education="education"
+    />
   </div>
 </template>
 
 <script>
+import Education from './Education.vue';
 
 export default {
+  components: {
+    Education,
+  },
   props: {
     educations: {
       type: Array,

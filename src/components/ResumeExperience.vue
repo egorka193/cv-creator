@@ -1,28 +1,22 @@
 <template>
   <div
-    v-for="(experience, i) in experiences"
+    v-for="(experience) in experiences"
     :key="experience.id"
     class="experience"
   >
-    <p class="experience__time">
-      {{ (experiences[i].from !== '' && experiences[i].to !== '') ?
-        `${experiences[i].from + ' - ' + experiences[i].to}` : '-' }}
-    </p>
-    <div class="experience__position">
-      <h4>
-        {{ experiences[i].position !== '' ? experiences[i].position : '' }}
-      </h4>
-      <p>
-        {{ (experiences[i].company !== '' && experiences[i].city !== '') ?
-          `${experiences[i].company + ', ' + experiences[i].city}` : '' }}
-      </p>
-    </div>
+    <Experience
+      :experience="experience"
+    />
   </div>
 </template>
 
 <script>
+import Experience from './Experience.vue';
 
 export default {
+  components: {
+    Experience,
+  },
   props: {
     experiences: {
       type: Array,

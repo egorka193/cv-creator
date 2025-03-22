@@ -64,6 +64,7 @@ export default {
       experiences.value[index][key] = value;
     };
     const changeEducation = (index, key, value) => {
+      console.log(index, key, value);
       educations.value[index][key] = value;
     };
     const deleteExperience = (index) => {
@@ -83,8 +84,8 @@ export default {
         position: '',
         company: '',
         city: '',
-        from: '',
-        to: '',
+        from: null,
+        to: null,
       };
       experienceId += 1;
       experiences.value.push(obj);
@@ -96,8 +97,8 @@ export default {
         city: '',
         degree: '',
         subject: '',
-        from: '',
-        to: '',
+        from: null,
+        to: null,
       };
       educationId += 1;
       educations.value.push(obj);

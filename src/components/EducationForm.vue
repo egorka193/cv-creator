@@ -20,15 +20,15 @@
       placeholder="Subject"
       @input="handleInput('subject', $event)"
     />
-    <InputText
-      :inputValue="educationsValues.from"
-      placeholder="from"
-      @input="handleInput('from', $event)"
+    <DatePicker
+      :value="educationsValues.from"
+      placeholder="From"
+      @update="handleInput('from', $event)"
     />
-    <InputText
-      :inputValue="educationsValues.to"
-      placeholder="to"
-      @input="handleInput('to', $event)"
+    <DatePicker
+      :value="educationsValues.to"
+      placeholder="To"
+      @update="handleInput('to', $event)"
     />
     <CvButton
       name="Delete"
@@ -40,11 +40,13 @@
 <script>
 import CvButton from './CvButton.vue';
 import InputText from './InputText.vue';
+import DatePicker from './DatePicker.vue';
 
 export default {
   components: {
     CvButton,
     InputText,
+    DatePicker,
   },
   props: {
     educationsValues: {
@@ -58,6 +60,7 @@ export default {
       context.emit('deleteEducation');
     };
     const handleInput = (key, value) => {
+      console.log(key, value);
       context.emit('handleInput', key, value);
     };
 
