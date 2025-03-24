@@ -3,7 +3,6 @@
     <Datepicker
       :modelValue="value"
       class="date-picker-input"
-      :clearable="false"
       :placeholder="placeholder"
       @update:modelValue="update"
     />
