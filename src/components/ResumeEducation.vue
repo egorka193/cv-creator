@@ -1,10 +1,10 @@
 <template>
   <div
-    v-for="(education) in educations"
-    :key="education.id"
     class="education"
   >
     <Education
+      v-for="(education) in educations"
+      :key="education.id"
       :education="education"
     />
   </div>

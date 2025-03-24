@@ -29,32 +29,26 @@ export default {
     },
   },
   setup(props) {
-    const from = computed(() => {
-      if (!props.education.from) {
+    const date = (value) => {
+      if (!value) {
         return '';
       }
-      const year = props.education.from.getFullYear();
-      const month = props.education.from.getMonth();
-      const day = props.education.from.getDate();
+      const year = value.getFullYear();
+      const month = value.getMonth();
+      const day = value.getDate();
 
       return `${year}-${month}-${day}`;
-    });
-    const to = computed(() => {
-      if (!props.education.from) {
-        return '';
-      }
-      const year = props.education.to.getFullYear();
-      const month = props.education.to.getMonth();
-      const day = props.education.to.getDate();
+    };
 
-      return `${year}-${month}-${day}`;
-    });
+    const from = computed(() => date(props.education.from));
+    const to = computed(() => date(props.education.to));
     const time = computed(() => `${from.value} - ${to.value}`);
 
     return {
       from,
       to,
       time,
+      date,
     };
   },
 };

@@ -1,10 +1,10 @@
 <template>
   <div
-    v-for="(experience) in experiences"
-    :key="experience.id"
     class="experience"
   >
     <Experience
+      v-for="(experience) in experiences"
+      :key="experience.id"
       :experience="experience"
     />
   </div>

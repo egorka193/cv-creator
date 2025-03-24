@@ -64,7 +64,6 @@ export default {
       experiences.value[index][key] = value;
     };
     const changeEducation = (index, key, value) => {
-      console.log(index, key, value);
       educations.value[index][key] = value;
     };
     const deleteExperience = (index) => {

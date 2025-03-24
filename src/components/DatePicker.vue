@@ -3,7 +3,7 @@
     <Datepicker
       :modelValue="value"
       class="date-picker-input"
-      :clearable="true"
+      :clearable="false"
       :placeholder="placeholder"
       @update:modelValue="update"
     />
@@ -31,7 +31,6 @@ export default {
 
   setup(props, context) {
     const update = (value) => {
-      console.log('update:modelValue', value);
       context.emit('update', value);
     };
     return {
@@ -49,10 +48,7 @@ export default {
   width: 100%;
   font-size: 19px;
 }
-.date-picker :deep(.v3dp__clearable) {
- display: none;
-}
 .date-picker {
- margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 </style>

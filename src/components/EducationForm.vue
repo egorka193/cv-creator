@@ -60,7 +60,6 @@ export default {
       context.emit('deleteEducation');
     };
     const handleInput = (key, value) => {
-      console.log(key, value);
       context.emit('handleInput', key, value);
     };
 

@@ -24,32 +24,25 @@ export default {
     },
   },
   setup(props) {
-    const from = computed(() => {
-      if (!props.experience.from) {
+    const date = (value) => {
+      if (!value) {
         return '';
       }
-      const year = props.experience.from.getFullYear();
-      const month = props.experience.from.getMonth();
-      const day = props.experience.from.getDate();
+      const year = value.getFullYear();
+      const month = value.getMonth();
+      const day = value.getDate();
 
       return `${year}-${month}-${day}`;
-    });
-    const to = computed(() => {
-      if (!props.experience.from) {
-        return '';
-      }
-      const year = props.experience.to.getFullYear();
-      const month = props.experience.to.getMonth();
-      const day = props.experience.to.getDate();
-
-      return `${year}-${month}-${day}`;
-    });
+    };
+    const from = computed(() => date(props.experience.from));
+    const to = computed(() => date(props.experience.to));
     const time = computed(() => `${from.value} - ${to.value}`);
 
     return {
       from,
       to,
       time,
+      date,
     };
   },
 };
