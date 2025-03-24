@@ -1,57 +1,65 @@
 <template>
-  <div
-    v-for="(education, i) in educations"
-    :key="education.id"
-    class="education"
-  >
-    <div class="education__time">
-      {{ (educations[i].from !== '' && educations[i].to !== '') ?
-        `${educations[i].from + ' - ' + educations[i].to}` : '-' }}
+  <div class="resume-education">
+    <div class="resume-education__time">
+      {{ time }}
     </div>
-    <div class="education__degree">
-      <h4 class="education__university">
-        {{ (educations[i].universityName !== '' && educations[i].city !== '') ?
-          `${educations[i].universityName + ', ' + educations[i].city}` : '' }}
+    <div class="resume-education__degree">
+      <h4 class="resume-education__university">
+        {{ (education.universityName !== '' && education.city !== '') ?
+          `${education.universityName + ', ' + education.city}` : '' }}
       </h4>
       <div>
-        {{ educations[i].degree !== '' ?
-          `${'Degree' + ': ' + educations[i].degree}` : '' }}
+        {{ education.degree !== '' ?
+          `${'Degree' + ': ' + education.degree}` : '' }}
       </div>
       <div>
-        {{ educations[i].subject !== '' ?
-          `${'Subject' + ': ' + educations[i].subject}` : '' }}
+        {{ education.subject !== '' ?
+          `${'Subject' + ': ' + education.subject}` : '' }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue';
+import formatDate from './utils/formatDate';
 
 export default {
   props: {
-    educations: {
-      type: Array,
+    education: {
+      type: Object,
       required: true,
     },
+  },
+  setup(props) {
+    const from = computed(() => formatDate(props.education.from));
+    const to = computed(() => formatDate(props.education.to));
+    const time = computed(() => `${from.value} - ${to.value}`);
+
+    return {
+      from,
+      to,
+      time,
+    };
   },
 };
 </script>
 
 <style scoped>
-.education{
+.resume-education{
   display: flex;
   gap: 20px;
   font-size: 20px;
   margin-bottom: 20px;
 }
-.education__time{
+.resume-education__time{
   font-weight: 600;
-  width: 200px;
+  width: 100px;
 }
-.education__degree{
+.resume-education__degree{
   width: 500px;
 }
-.education__university{
+.resume-education__university{
   font-weight: 600;
 }
 </style>

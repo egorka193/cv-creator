@@ -15,15 +15,15 @@
       placeholder="City"
       @input="handleInput('city', $event)"
     />
-    <InputText
-      :inputValue="experiencesValues.from"
+    <DatePicker
+      :value="experiencesValues.from"
       placeholder="From"
-      @input="handleInput('from', $event)"
+      @update="handleInput('from', $event)"
     />
-    <InputText
-      :inputValue="experiencesValues.to"
+    <DatePicker
+      :value="experiencesValues.to"
       placeholder="To"
-      @input="handleInput('to', $event)"
+      @update="handleInput('to', $event)"
     />
     <CvButton
       name="Delete"
@@ -35,11 +35,13 @@
 <script>
 import CvButton from './CvButton.vue';
 import InputText from './InputText.vue';
+import DatePicker from './DatePicker.vue';
 
 export default {
   components: {
     CvButton,
     InputText,
+    DatePicker,
   },
   props: {
     experiencesValues: {
@@ -65,4 +67,7 @@ export default {
 </script>
 
 <style scoped>
+.experience-form{
+  margin-bottom: 20px;
+}
 </style>

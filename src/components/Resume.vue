@@ -20,13 +20,13 @@
           <div v-if="experiences.length === 0">
             -
           </div>
-          <ResumeExperience :experiences="experiences" />
+          <ResumeExperienceList :experiences="experiences" />
         </ResumeGraph>
         <ResumeGraph name="Educations">
           <div v-if="educations.length === 0">
             -
           </div>
-          <ResumeEducation :educations="educations" />
+          <ResumeEducationList :educations="educations" />
         </ResumeGraph>
       </div>
       <div class="resume__body__rootlet">
@@ -40,15 +40,15 @@
 import { computed } from 'vue';
 import ResumeGraph from './ResumeGraph.vue';
 import ResumeRootlet from './ResumeRootlet.vue';
-import ResumeExperience from './ResumeExperience.vue';
-import ResumeEducation from './ResumeEducation.vue';
+import ResumeExperienceList from './ResumeExperienceList.vue';
+import ResumeEducationList from './ResumeEducationList.vue';
 
 export default {
   components: {
     ResumeGraph,
     ResumeRootlet,
-    ResumeEducation,
-    ResumeExperience,
+    ResumeEducationList,
+    ResumeExperienceList,
   },
   props: {
     data: {

@@ -1,52 +1,57 @@
 <template>
-  <div
-    v-for="(experience, i) in experiences"
-    :key="experience.id"
-    class="experience"
-  >
-    <p class="experience__time">
-      {{ (experiences[i].from !== '' && experiences[i].to !== '') ?
-        `${experiences[i].from + ' - ' + experiences[i].to}` : '-' }}
+  <div class="resume-experience">
+    <p class="resume-experience__time">
+      {{ time }}
     </p>
-    <div class="experience__position">
+    <div class="resume-experience__position">
       <h4>
-        {{ experiences[i].position !== '' ? experiences[i].position : '' }}
+        {{ experience.position !== '' ? experience.position : '' }}
       </h4>
       <p>
-        {{ (experiences[i].company !== '' && experiences[i].city !== '') ?
-          `${experiences[i].company + ', ' + experiences[i].city}` : '' }}
+        {{ (experience.company !== '' && experience.city !== '') ?
+          `${experience.company + ', ' + experience.city}` : '' }}
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import { computed } from 'vue';
+import formatDate from './utils/formatDate';
 
 export default {
   props: {
-    experiences: {
-      type: Array,
+    experience: {
+      type: Object,
       required: true,
     },
+  },
+  setup(props) {
+    const from = computed(() => formatDate(props.experience.from));
+    const to = computed(() => formatDate(props.experience.to));
+    const time = computed(() => `${from.value} - ${to.value}`);
+
+    return {
+      from,
+      to,
+      time,
+    };
   },
 };
 </script>
 
 <style scoped>
-.experience{
+.resume-experience{
   display: flex;
   gap: 20px;
   font-size: 20px;
   margin-bottom: 20px;
 }
-.experience__time{
+.resume-experience__time{
   font-weight: 600;
-  width: 200px;
+  width: 100px;
 }
-.experience__position{
-  width: 500px;
-}
-.experience__position h4{
+.resume-experience__position{
   font-weight: 600;
 }
 </style>
