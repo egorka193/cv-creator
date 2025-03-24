@@ -1,20 +1,21 @@
 <template>
   <div class="date-picker">
-    <Datepicker
+    <VueDatePicker
       :modelValue="value"
-      class="date-picker-input"
       :placeholder="placeholder"
+      :enable-time-picker="false"
       @update:modelValue="update"
     />
   </div>
 </template>
 
 <script>
-import Datepicker from 'vue3-datepicker';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   components: {
-    Datepicker,
+    VueDatePicker,
   },
   props: {
     value: {
@@ -40,14 +41,24 @@ export default {
 </script>
 
 <style scoped>
-.date-picker :deep(.date-picker-input) {
+.date-picker :deep(.dp__pointer) {
   padding: 12px;
   border-radius: 5px;
   border: none;
   width: 100%;
   font-size: 19px;
 }
+.date-picker :deep(.dp__input_icon) {
+  display: none;
+}
+.date-picker :deep(.dp__icon) {
+  display: none;
+}
 .date-picker {
   margin-bottom: 20px;
 }
+.date-picker :deep(::placeholder){
+  color: rgb(68, 68, 68);
+}
+
 </style>
