@@ -3,13 +3,137 @@
     <h2 class="questionnaire__title">
       Personal Information
     </h2>
-    <div class="questionnaire__inputs-wrapper">
-      <InputText
+      <!-- <InputText
         :inputValue="inputsValues.firstName"
         placeholder="First name"
         @input="handleInput($event, 'firstName')"
-      />
-      <InputText
+      > -->
+    <ValidateForm
+      class="questionnaire__inputs-wrapper"
+      @submit="onSubmit"
+    >
+      <div class="fields-wrapper">
+        <Field
+          :inputValue="inputsValues.firstName"
+          class="input"
+          placeholder="First name"
+          type="firstName"
+          name="firstName"
+          :rules="validateValue"
+          @input="handleInput($event.target.value, 'firstName')"
+        />
+        <ErrorMessage
+          class="error"
+          name="firstName"
+        />
+      </div>
+      <div class="fields-wrapper">
+        <Field
+          :inputValue="inputsValues.lastName"
+          class="input"
+          placeholder="Last name"
+          type="lastName"
+          name="lastName"
+          :rules="validateValue"
+          @input="handleInput($event.target.value, 'lastName')"
+        />
+        <ErrorMessage
+          class="error"
+          name="lastName"
+        />
+      </div>
+      <div class="fields-wrapper">
+        <Field
+          :inputValue="inputsValues.title"
+          class="input"
+          placeholder="Title"
+          type="title"
+          name="title"
+          :rules="validateValue"
+          @input="handleInput($event.target.value, 'title')"
+        />
+        <ErrorMessage
+          class="error"
+          name="title"
+        />
+      </div>
+      <div class="fields-wrapper">
+        <Field
+          name="url_field"
+          type="text"
+          :inputValue="inputsValues.photo"
+          class="input"
+          placeholder="Your Photo"
+          :rules="validateUrl"
+          @input="handleInput($event.target.value, 'photo')"
+        />
+        <ErrorMessage
+          class="error"
+          name="url_field"
+        />
+      </div>
+      <div class="fields-wrapper">
+        <Field
+          :inputValue="inputsValues.address"
+          class="input"
+          placeholder="Address"
+          type="address"
+          name="address"
+          :rules="validateValue"
+          @input="handleInput($event.target.value, 'address')"
+        />
+        <ErrorMessage
+          class="error"
+          name="address"
+        />
+      </div>
+      <div class="fields-wrapper">
+        <Field
+          :inputValue="inputsValues.phoneNumber"
+          class="input"
+          placeholder="Phone number"
+          type="phoneNumber"
+          name="phoneNumber"
+          :rules="validatePhoneNumber"
+          @input="handleInput($event.target.value, 'phoneNumber')"
+        />
+        <ErrorMessage
+          class="error"
+          name="phoneNumber"
+        />
+      </div>
+      <div class="fields-wrapper">
+        <Field
+          :inputValue="inputsValues.email"
+          class="input"
+          placeholder="Email"
+          type="email"
+          name="email"
+          :rules="validateEmail"
+          @input="handleInput($event.target.value, 'email')"
+        />
+        <ErrorMessage
+          name="email"
+          class="error"
+        />
+      </div>
+      <div class="last-child">
+        <Field
+          :inputValue="inputsValues.description"
+          class="input last-child"
+          placeholder="Description"
+          type="description"
+          name="description"
+          :rules="validateDescription"
+          @input="handleInput($event.target.value, 'description')"
+        />
+        <ErrorMessage
+          class="error"
+          name="description"
+        />
+      </div>
+    </ValidateForm>
+      <!-- <InputText
         :inputValue="inputsValues.lastName"
         placeholder="Last name"
         @input="handleInput($event, 'lastName')"
@@ -44,8 +168,7 @@
         :inputValue="inputsValues.description"
         placeholder="Description"
         @input="handleInput($event, 'description')"
-      />
-    </div>
+      /> -->
     <div class="questionnaire__title-wrapper">
       <h2 class="questionnaire__title">
         Experience
@@ -94,17 +217,21 @@
 </template>
 
 <script>
-import InputText from './InputText.vue';
+import { Form as ValidateForm, Field, ErrorMessage } from 'vee-validate';
+// import InputText from './InputText.vue';
 import CvButton from './CvButton.vue';
 import ExperienceForm from './ExperienceForm.vue';
 import EducationForm from './EducationForm.vue';
 
 export default {
   components: {
-    InputText,
+    // InputText,
     CvButton,
     ExperienceForm,
     EducationForm,
+    ValidateForm,
+    Field,
+    ErrorMessage,
   },
   props: {
     inputsValues: {
@@ -132,7 +259,58 @@ export default {
     'linkGenerate',
   ],
   setup(props, context) {
+    function onSubmit(values) {
+      console.log(JSON.stringify(values, null, 2));
+    }
+    const validateEmail = (value) => {
+      if (!value) {
+        return 'This field is required';
+      }
+      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+      if (!regex.test(value)) {
+        return 'This field must be a valid email';
+      }
+      return true;
+    };
+    const validateValue = (value) => {
+      if (!value) {
+        return 'This field is required';
+      }
+      return true;
+    };
+    const validateDescription = (value) => {
+      if (!value) {
+        return 'This field is required';
+      }
+      const str = value;
+      if (str.length < 50) {
+        return 'This field minimum allowed is 50 symbols';
+      }
+      return true;
+    };
+    const validatePhoneNumber = (value) => {
+      if (!value) {
+        return 'This field is required';
+      }
+      const regex = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+      if (!regex.test(value)) {
+        return 'This field must be a valid phone';
+      }
+      return true;
+    };
+    const validateUrl = (value) => {
+      if (!value) {
+        return 'This field is required';
+      }
+      // eslint-disable-next-line max-len, no-useless-escape
+      const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
+      if (!regex.test(value)) {
+        return 'This field must be a valid URL';
+      }
+      return true;
+    };
     const handleInput = (value, key) => {
+      console.log(value, key);
       context.emit('handleInput', value, key);
     };
     const linkGenerate = (value, key) => {
@@ -174,6 +352,12 @@ export default {
       clickOnReset,
       linkGenerate,
       generatePdf,
+      validateEmail,
+      validateValue,
+      validateUrl,
+      onSubmit,
+      validatePhoneNumber,
+      validateDescription,
     };
   },
 };
@@ -209,5 +393,20 @@ export default {
 }
 .last-child{
   margin-bottom: 0px;
+}
+.input{
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  font-size: 19px;
+}
+.fields-wrapper{
+  margin-bottom: 20px;
+}
+.error{
+  color: red;
+  font-weight: 600;
+  font-size: 20px;
 }
 </style>
