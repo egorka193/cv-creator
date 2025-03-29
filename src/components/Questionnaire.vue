@@ -3,16 +3,67 @@
     <h2 class="questionnaire__title">
       Personal Information
     </h2>
-      <!-- <InputText
-        :inputValue="inputsValues.firstName"
-        placeholder="First name"
-        @input="handleInput($event, 'firstName')"
-      > -->
     <ValidateForm
       class="questionnaire__inputs-wrapper"
       @submit="onSubmit"
     >
-      <div class="fields-wrapper">
+      <InputText
+        :inputValue="inputsValues.firstName"
+        placeholder="First Name"
+        :rule="validateValue"
+        name="firstValue"
+        @input="handleInput($event, 'firstName')"
+      />
+      <InputText
+        :inputValue="inputsValues.lastName"
+        placeholder="Last Name"
+        :rule="validateValue"
+        name="lastName"
+        @input="handleInput($event, 'lastName')"
+      />
+      <InputText
+        :inputValue="inputsValues.title"
+        placeholder="Title"
+        :rule="validateValue"
+        name="title"
+        @input="handleInput($event, 'title')"
+      />
+      <InputText
+        :inputValue="inputsValues.photo"
+        placeholder="Photo"
+        :rule="validateUrl"
+        name="photo"
+        @input="handleInput($event, 'photo')"
+      />
+      <InputText
+        :inputValue="inputsValues.address"
+        placeholder="Address"
+        :rule="validateValue"
+        name="address"
+        @input="handleInput($event, 'address')"
+      />
+      <InputText
+        :inputValue="inputsValues.phoneNumber"
+        placeholder="Phone"
+        :rule="validatePhoneNumber"
+        name="phoneNumber"
+        @input="handleInput($event, 'phoneNumber')"
+      />
+      <InputText
+        :inputValue="inputsValues.email"
+        placeholder="Email"
+        :rule="validateEmail"
+        name="email"
+        @input="handleInput($event, 'email')"
+      />
+      <InputText
+        :inputValue="inputsValues.description"
+        placeholder="Description"
+        :rule="validateDescription"
+        name="description"
+        @input="handleInput($event, 'description')"
+      />
+      <!-- <div class="fields-wrapper">
         <Field
           :inputValue="inputsValues.firstName"
           class="input"
@@ -131,44 +182,8 @@
           class="error"
           name="description"
         />
-      </div>
+      </div> -->
     </ValidateForm>
-      <!-- <InputText
-        :inputValue="inputsValues.lastName"
-        placeholder="Last name"
-        @input="handleInput($event, 'lastName')"
-      />
-      <InputText
-        :inputValue="inputsValues.title"
-        placeholder="Title"
-        @input="handleInput($event, 'title')"
-      />
-      <InputText
-        :inputValue="inputsValues.photo"
-        placeholder="Your photo"
-        @input="linkGenerate($event, 'photo')"
-      />
-      <InputText
-        :inputValue="inputsValues.address"
-        placeholder="Address"
-        @input="handleInput($event, 'address')"
-      />
-      <InputText
-        :inputValue="inputsValues.phoneNumber"
-        placeholder="Phone number"
-        @input="handleInput($event, 'phoneNumber')"
-      />
-      <InputText
-        :inputValue="inputsValues.email"
-        placeholder="Email"
-        @input="handleInput($event, 'email')"
-      />
-      <InputText
-        class="last-child"
-        :inputValue="inputsValues.description"
-        placeholder="Description"
-        @input="handleInput($event, 'description')"
-      /> -->
     <div class="questionnaire__title-wrapper">
       <h2 class="questionnaire__title">
         Experience
@@ -217,21 +232,26 @@
 </template>
 
 <script>
-import { Form as ValidateForm, Field, ErrorMessage } from 'vee-validate';
-// import InputText from './InputText.vue';
+import { Form as ValidateForm } from 'vee-validate';
 import CvButton from './CvButton.vue';
 import ExperienceForm from './ExperienceForm.vue';
 import EducationForm from './EducationForm.vue';
+import InputText from './InputText.vue';
+import {
+  validateEmail,
+  validateUrl,
+  validateValue,
+  validateDescription,
+  validatePhoneNumber,
+} from './utils/rules';
 
 export default {
   components: {
-    // InputText,
+    InputText,
     CvButton,
     ExperienceForm,
     EducationForm,
     ValidateForm,
-    Field,
-    ErrorMessage,
   },
   props: {
     inputsValues: {
@@ -262,53 +282,6 @@ export default {
     function onSubmit(values) {
       console.log(JSON.stringify(values, null, 2));
     }
-    const validateEmail = (value) => {
-      if (!value) {
-        return 'This field is required';
-      }
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!regex.test(value)) {
-        return 'This field must be a valid email';
-      }
-      return true;
-    };
-    const validateValue = (value) => {
-      if (!value) {
-        return 'This field is required';
-      }
-      return true;
-    };
-    const validateDescription = (value) => {
-      if (!value) {
-        return 'This field is required';
-      }
-      const str = value;
-      if (str.length < 50) {
-        return 'This field minimum allowed is 50 symbols';
-      }
-      return true;
-    };
-    const validatePhoneNumber = (value) => {
-      if (!value) {
-        return 'This field is required';
-      }
-      const regex = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
-      if (!regex.test(value)) {
-        return 'This field must be a valid phone';
-      }
-      return true;
-    };
-    const validateUrl = (value) => {
-      if (!value) {
-        return 'This field is required';
-      }
-      // eslint-disable-next-line max-len, no-useless-escape
-      const regex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
-      if (!regex.test(value)) {
-        return 'This field must be a valid URL';
-      }
-      return true;
-    };
     const handleInput = (value, key) => {
       console.log(value, key);
       context.emit('handleInput', value, key);
@@ -352,12 +325,12 @@ export default {
       clickOnReset,
       linkGenerate,
       generatePdf,
-      validateEmail,
-      validateValue,
-      validateUrl,
       onSubmit,
-      validatePhoneNumber,
+      validateEmail,
+      validateUrl,
+      validateValue,
       validateDescription,
+      validatePhoneNumber,
     };
   },
 };
@@ -400,13 +373,5 @@ export default {
   border: none;
   width: 100%;
   font-size: 19px;
-}
-.fields-wrapper{
-  margin-bottom: 20px;
-}
-.error{
-  color: red;
-  font-weight: 600;
-  font-size: 20px;
 }
 </style>

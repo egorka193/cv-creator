@@ -55,7 +55,7 @@ export default {
     const educations = ref([]);
 
     const changeGraph = (value, key) => {
-      console.log(value);
+      console.log(value, key);
       data.value[key] = value;
     };
     const searchPhoto = () => {

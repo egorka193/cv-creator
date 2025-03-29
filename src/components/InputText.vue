@@ -1,30 +1,42 @@
 <template>
   <div class="input-text">
-    <!-- <ValidateForm
-      @submit="onSubmit"
-    >
-      <Field
-        type="email"
-        name="email"
-        :rules="validateEmail"
-      />
-      <ErrorMessage name="email" />
-    </ValidateForm> -->
     <input
-      class="input"
-      type="text"
+      :value="value"
+      :class="['input', errorMessage ? 'input-invalid' : '']"
       :placeholder="placeholder"
-      :value="inputValue"
-      @input="$emit('input', $event.target.value)"
+      type="text"
+      @input="onInput"
     >
-    <slot />
+    <span
+      class="error"
+    >
+      {{ errorMessage }}
+    </span>
+    <!-- <Field
+      :value="inputValue"
+      class="input"
+      :placeholder="placeholder"
+      type="text"
+      :name="placeholder"
+      :rules="rule"
+      @input="$emit('input', $event.target.value)"
+    />
+    <ErrorMessage
+      class="error"
+      :name="placeholder"
+    /> -->
   </div>
 </template>
 
 <script>
+import { useField } from 'vee-validate';
 
 export default {
   props: {
+    rule: {
+      type: Function,
+      required: true,
+    },
     inputValue: {
       type: String,
       required: true,
@@ -33,29 +45,31 @@ export default {
       type: String,
       required: true,
     },
+    name: {
+      type: String,
+      required: false,
+      default: '',
+    },
   },
   emits: ['input'],
-  setup() {
-    const onSubmit = (values) => {
-      console.log(JSON.stringify(values, null, 2));
-    };
-    const validateEmail = (value) => {
-      // if the field is empty
-      if (!value) {
-        return 'This field is required';
-      }
-      // if the field is not a valid email
-      const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-      if (!regex.test(value)) {
-        return 'This field must be a valid email';
-      }
-      // All is good
-      return true;
+  setup(props, context) {
+    const {
+      value,
+      errorMessage,
+      handleChange,
+    } = useField(props.name, props.rule, {
+      initialValue: props.inputValue,
+    });
+
+    const onInput = (val) => {
+      handleChange(val);
+      context.emit('input', val.target.value);
     };
 
     return {
-      onSubmit,
-      validateEmail,
+      value,
+      errorMessage,
+      onInput,
     };
   },
 };
@@ -69,7 +83,14 @@ export default {
   width: 100%;
   font-size: 19px;
 }
+.input-invalid{
+  border: 1px solid red;
+}
 .input-text{
   margin-bottom: 20px;
+}
+.error{
+  color: red;
+  font-size: 12px;
 }
 </style>
