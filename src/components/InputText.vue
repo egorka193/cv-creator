@@ -12,19 +12,6 @@
     >
       {{ errorMessage }}
     </span>
-    <!-- <Field
-      :value="inputValue"
-      class="input"
-      :placeholder="placeholder"
-      type="text"
-      :name="placeholder"
-      :rules="rule"
-      @input="$emit('input', $event.target.value)"
-    />
-    <ErrorMessage
-      class="error"
-      :name="placeholder"
-    /> -->
   </div>
 </template>
 

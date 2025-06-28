@@ -63,126 +63,6 @@
         name="description"
         @input="handleInput($event, 'description')"
       />
-      <!-- <div class="fields-wrapper">
-        <Field
-          :inputValue="inputsValues.firstName"
-          class="input"
-          placeholder="First name"
-          type="firstName"
-          name="firstName"
-          :rules="validateValue"
-          @input="handleInput($event.target.value, 'firstName')"
-        />
-        <ErrorMessage
-          class="error"
-          name="firstName"
-        />
-      </div>
-      <div class="fields-wrapper">
-        <Field
-          :inputValue="inputsValues.lastName"
-          class="input"
-          placeholder="Last name"
-          type="lastName"
-          name="lastName"
-          :rules="validateValue"
-          @input="handleInput($event.target.value, 'lastName')"
-        />
-        <ErrorMessage
-          class="error"
-          name="lastName"
-        />
-      </div>
-      <div class="fields-wrapper">
-        <Field
-          :inputValue="inputsValues.title"
-          class="input"
-          placeholder="Title"
-          type="title"
-          name="title"
-          :rules="validateValue"
-          @input="handleInput($event.target.value, 'title')"
-        />
-        <ErrorMessage
-          class="error"
-          name="title"
-        />
-      </div>
-      <div class="fields-wrapper">
-        <Field
-          name="url_field"
-          type="text"
-          :inputValue="inputsValues.photo"
-          class="input"
-          placeholder="Your Photo"
-          :rules="validateUrl"
-          @input="handleInput($event.target.value, 'photo')"
-        />
-        <ErrorMessage
-          class="error"
-          name="url_field"
-        />
-      </div>
-      <div class="fields-wrapper">
-        <Field
-          :inputValue="inputsValues.address"
-          class="input"
-          placeholder="Address"
-          type="address"
-          name="address"
-          :rules="validateValue"
-          @input="handleInput($event.target.value, 'address')"
-        />
-        <ErrorMessage
-          class="error"
-          name="address"
-        />
-      </div>
-      <div class="fields-wrapper">
-        <Field
-          :inputValue="inputsValues.phoneNumber"
-          class="input"
-          placeholder="Phone number"
-          type="phoneNumber"
-          name="phoneNumber"
-          :rules="validatePhoneNumber"
-          @input="handleInput($event.target.value, 'phoneNumber')"
-        />
-        <ErrorMessage
-          class="error"
-          name="phoneNumber"
-        />
-      </div>
-      <div class="fields-wrapper">
-        <Field
-          :inputValue="inputsValues.email"
-          class="input"
-          placeholder="Email"
-          type="email"
-          name="email"
-          :rules="validateEmail"
-          @input="handleInput($event.target.value, 'email')"
-        />
-        <ErrorMessage
-          name="email"
-          class="error"
-        />
-      </div>
-      <div class="last-child">
-        <Field
-          :inputValue="inputsValues.description"
-          class="input last-child"
-          placeholder="Description"
-          type="description"
-          name="description"
-          :rules="validateDescription"
-          @input="handleInput($event.target.value, 'description')"
-        />
-        <ErrorMessage
-          class="error"
-          name="description"
-        />
-      </div> -->
     </ValidateForm>
     <div class="questionnaire__title-wrapper">
       <h2 class="questionnaire__title">
@@ -283,7 +163,6 @@ export default {
       console.log(JSON.stringify(values, null, 2));
     }
     const handleInput = (value, key) => {
-      console.log(value, key);
       context.emit('handleInput', value, key);
     };
     const linkGenerate = (value, key) => {
