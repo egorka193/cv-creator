@@ -3,49 +3,67 @@
     <h2 class="questionnaire__title">
       Personal Information
     </h2>
-    <div class="questionnaire__inputs-wrapper">
+    <ValidateForm
+      class="questionnaire__inputs-wrapper"
+      @submit="onSubmit"
+    >
       <InputText
         :inputValue="inputsValues.firstName"
-        placeholder="First name"
+        placeholder="First Name"
+        :rule="validateValue"
+        name="firstValue"
         @input="handleInput($event, 'firstName')"
       />
       <InputText
         :inputValue="inputsValues.lastName"
-        placeholder="Last name"
+        placeholder="Last Name"
+        :rule="validateValue"
+        name="lastName"
         @input="handleInput($event, 'lastName')"
       />
       <InputText
         :inputValue="inputsValues.title"
         placeholder="Title"
+        :rule="validateValue"
+        name="title"
         @input="handleInput($event, 'title')"
       />
       <InputText
         :inputValue="inputsValues.photo"
-        placeholder="Your photo"
-        @input="linkGenerate($event, 'photo')"
+        placeholder="Photo"
+        :rule="validateUrl"
+        name="photo"
+        @input="handleInput($event, 'photo')"
       />
       <InputText
         :inputValue="inputsValues.address"
         placeholder="Address"
+        :rule="validateValue"
+        name="address"
         @input="handleInput($event, 'address')"
       />
       <InputText
         :inputValue="inputsValues.phoneNumber"
-        placeholder="Phone number"
+        placeholder="Phone"
+        :rule="validatePhoneNumber"
+        name="phoneNumber"
         @input="handleInput($event, 'phoneNumber')"
       />
       <InputText
         :inputValue="inputsValues.email"
         placeholder="Email"
+        :rule="validateEmail"
+        name="email"
         @input="handleInput($event, 'email')"
       />
       <InputText
-        class="last-child"
         :inputValue="inputsValues.description"
         placeholder="Description"
+        :rule="validateDescription"
+        name="description"
         @input="handleInput($event, 'description')"
       />
-    </div>
+    </ValidateForm>
     <div class="questionnaire__title-wrapper">
       <h2 class="questionnaire__title">
         Experience
@@ -94,10 +112,18 @@
 </template>
 
 <script>
-import InputText from './InputText.vue';
+import { Form as ValidateForm } from 'vee-validate';
 import CvButton from './CvButton.vue';
 import ExperienceForm from './ExperienceForm.vue';
 import EducationForm from './EducationForm.vue';
+import InputText from './InputText.vue';
+import {
+  validateEmail,
+  validateUrl,
+  validateValue,
+  validateDescription,
+  validatePhoneNumber,
+} from './utils/rules';
 
 export default {
   components: {
@@ -105,6 +131,7 @@ export default {
     CvButton,
     ExperienceForm,
     EducationForm,
+    ValidateForm,
   },
   props: {
     inputsValues: {
@@ -132,6 +159,9 @@ export default {
     'linkGenerate',
   ],
   setup(props, context) {
+    function onSubmit(values) {
+      console.log(JSON.stringify(values, null, 2));
+    }
     const handleInput = (value, key) => {
       context.emit('handleInput', value, key);
     };
@@ -174,6 +204,12 @@ export default {
       clickOnReset,
       linkGenerate,
       generatePdf,
+      onSubmit,
+      validateEmail,
+      validateUrl,
+      validateValue,
+      validateDescription,
+      validatePhoneNumber,
     };
   },
 };
@@ -209,5 +245,12 @@ export default {
 }
 .last-child{
   margin-bottom: 0px;
+}
+.input{
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  font-size: 19px;
 }
 </style>
